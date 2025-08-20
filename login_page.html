@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Times New Roman', serif;
+      display: flex;
+      height: 100vh;
+    }
+
+    /* Left description section */
+    .left {
+      flex: 1;
+      background: #1f293e;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .left h1 {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    .left p {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    /* Right login form section */
+    .right {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #000;
+    }
+
+    form {
+      background: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px #e3f3ff;
+      width: 320px;
+      text-align: center;
+    }
+
+    form h3 {
+      font-size: 26px;
+      margin-top: 0;
+      margin-bottom: 15px;
+    }
+
+    input[type="text"], 
+    input[type="password"], 
+    input[type="checkbox"], 
+    button {
+      width: 100%;
+      margin-top: 15px;
+      padding: 10px;
+      font-size: 16px;
+      box-shadow: 0 0 8px #3c0391;
+      border: 2px solid #3c0391;
+      border-radius: 5px;
+    }
+
+    input[type="checkbox"] {
+      width: auto;
+      margin-top: 0;
+      box-shadow: none;
+      border: none;
+    }
+
+    .remember {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+      font-size: 14px;
+      color: #333;
+      text-align: left;
+    }
+
+    .remember label {
+      margin-left: 6px;
+    }
+
+    button {
+      background: #1f293e;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover { background: #042d66; }
+
+    .captcha-box {
+      margin-top: 15px;
+      background: #f1f1f1;
+      padding: 10px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      font-size: 18px;
+      user-select: none;
+      border: 2px solid #3c0391;
+      border-radius: 5px;
+    }
+
+    .error {
+      color: red;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+    .password-hint {
+      font-size: 12px;
+      color: #555;
+      margin-top: 5px;
+      text-align: left;
+    }
+
+    /* Links below login */
+    .below-login {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    .signup {
+      color: #000;
+      text-decoration: none;
+    }
+
+    .forgot {
+      font-style: italic;
+      color: #000;
+      text-decoration: none;
+    }
+
+    .signup:hover, .forgot:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <!-- Left description section -->
+  <div class="left">
+    <div>
+      <h1>yo!!!!! welcome</h1>
+      <p>
+        This is a secure portal that i created for my course work.
+        Please use your credentials to log in on the right side.
+      </p>
+    </div>
+  </div>
+
+  <!-- Right login section -->
+  <div class="right">
+    <form id="loginForm">
+      <h3>Login</h3>
+      <input type="text" id="username" placeholder="Username" required>
+      
+      <input type="password" id="password" placeholder="Password" required>
+      <div class="password-hint">
+        Password should contain 8 or more characters, including numbers and special characters (@, _, -).
+      </div>
+
+      <!-- Remember me -->
+      <div class="remember">
+        <input type="checkbox" id="rememberMe">
+        <label for="rememberMe">Remember me</label>
+      </div>
+
+      <div class="captcha-box" id="captchaText"></div>
+      <input type="text" id="captchaInput" placeholder="Enter Captcha" required>
+
+      <button type="submit">Login</button>
+      <div class="error" id="errorMsg"></div>
+
+      <!-- New user / Forgot password links -->
+      <div class="below-login">
+        <a href="#" class="signup">New user? Signup</a>
+        <a href="#" class="forgot">Forgot password?</a>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    function generateCaptcha() {
+      let chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; 
+      let captcha = "";
+      for (let i = 0; i < 5; i++) {
+        captcha += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return captcha;
+    }
+
+    let captchaCode = generateCaptcha();
+    document.getElementById("captchaText").innerText = captchaCode;
+
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      let username = document.getElementById("username").value;
+      let password = document.getElementById("password").value;
+      let captchaInput = document.getElementById("captchaInput").value;
+      let errorMsg = document.getElementById("errorMsg");
+
+      if (captchaInput !== captchaCode) {
+        errorMsg.innerText = "❌ Incorrect captcha. Please try again.";
+        captchaCode = generateCaptcha();
+        document.getElementById("captchaText").innerText = captchaCode;
+        return;
+      }
+
+      if (username === "admin" && password === "12345") {
+        alert("✅ Login successful!");
+      } else {
+        errorMsg.innerText = "❌ Invalid username or password.";
+      }
+    });
+  </script>
+</body>
+</html>

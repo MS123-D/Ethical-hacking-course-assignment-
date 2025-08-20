@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Login - Personal Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: white;
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+        form {
+            background: #1f1f1f;
+            padding: 50px 60px;
+            border-radius: 20px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.7);
+            width: 400px;
+            max-width: 90%;
+            text-align: center;
+            border: 1px solid #303030;
+        }
+        h2 {
+            margin-bottom: 35px;
+            color: #fff;
+            font-weight: 700;
+            font-size: 28px;
+        }
+        input {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 25px;
+            border: 1.5px solid #444;
+            border-radius: 10px;
+            background: #2a2a2a;
+            color: white;
+            font-size: 18px;
+            transition: border-color 0.3s ease;
+        }
+        input::placeholder {
+            color: #bbb;
+        }
+        input:focus {
+            border-color: #3f51b5;
+            outline: none;
+            background: #3a3a3a;
+        }
+        button {
+            width: 100%;
+            padding: 16px;
+            background-color: #3f51b5;
+            border: none;
+            color: white;
+            font-weight: 700;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            letter-spacing: 1px;
+        }
+        button:hover {
+            background-color: #2c3e9f;
+        }
+        .error {
+            color: #ff6b6b;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <form method="post" novalidate>
+        <h2>Personal Dashboard Login</h2>
+        <input name="username" placeholder="Username" required autocomplete="off" />
+        <input name="password" type="password" placeholder="Password" required />
+        <button type="submit">Log In</button>
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
+    </form>
+</body>
+</html>
